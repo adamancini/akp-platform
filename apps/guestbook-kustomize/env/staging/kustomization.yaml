@@ -1,13 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 resources:
 - ../../base
-
 namespace: guestbook-kustomize-staging
-
 # Kargo's kustomize-set-image step updates newTag here on every promotion —
 # this file IS the record of what runs in this environment.
 images:
 - name: ghcr.io/akuity/guestbook
-  newTag: latest
+  newTag: v0.0.2
