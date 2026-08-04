@@ -1,0 +1,6 @@
+# The kustomize `namespace` transformer in each env overlay renames this
+# Namespace (and re-homes all resources) to rollouts-app-<stage>.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: rollouts-app

@@ -1,0 +1,7 @@
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Project
+metadata:
+  name: rollouts-app
+  annotations:
+    # Sync before the other Kargo resources so the project namespace exists first.
+    argocd.argoproj.io/sync-wave: "-1"

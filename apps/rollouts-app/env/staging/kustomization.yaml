@@ -1,0 +1,39 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ../../base
+
+namespace: rollouts-app-staging
+
+# Kargo's kustomize-set-image step updates newTag here on every promotion —
+# this file IS the record of what runs in this environment.
+images:
+- name: ghcr.io/adamancini/akp-monorepo-rollouts-app
+  newTag: latest
+
+# Copies the tag set above into the SEMVER env var, so it never drifts from
+# the image actually running.
+replacements:
+- source:
+    kind: Deployment
+    name: rollouts-app
+    fieldPath: spec.template.spec.containers.[name=rollouts-app].image
+    options:
+      delimiter: ":"
+      index: 1
+  targets:
+  - select:
+      kind: Deployment
+      name: rollouts-app
+    fieldPaths:
+    - spec.template.spec.containers.[name=rollouts-app].env.[name=SEMVER].value
+
+patches:
+- patch: |-
+    - op: replace
+      path: /data/stage
+      value: staging
+  target:
+    kind: ConfigMap
+    name: app-config

@@ -1,0 +1,19 @@
+# Convention: the AppProject name matches the app directory name and the
+# Kargo Project name. Deliberately permissive for quickstart purposes —
+# scope sourceRepos/destinations down before production use.
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: rollouts-app
+  namespace: argocd
+spec:
+  description: Rollouts demo app promoted by committing Kustomize image bumps to main
+  sourceRepos:
+    - '*'
+  destinations:
+    - server: '*'
+      name: '*'
+      namespace: '*'
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
