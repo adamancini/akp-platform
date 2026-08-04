@@ -7,7 +7,7 @@ namespace: rollouts-app-dev
 # this file IS the record of what runs in this environment.
 images:
 - name: ghcr.io/adamancini/akp-monorepo-rollouts-app
-  newTag: 1-green
+  newTag: 2-blue
 # Copies the tag set above into the SEMVER env var, so it never drifts from
 # the image actually running.
 replacements:
