@@ -38,12 +38,19 @@ echo "Using repo URL: ${repo_url}"
 
 for project in "${PROJECTS[@]}"; do
   echo "==> ${project}"
-  kargo create repo-credentials github-creds \
+  if output=$(kargo create repo-credentials github-creds \
     --project="${project}" \
     --git \
     --username="${username}" \
     --password="${token}" \
-    --repo-url="${repo_url}"
+    --repo-url="${repo_url}" 2>&1); then
+    echo "${output}"
+  elif [[ "${output}" == *"already exists"* ]]; then
+    echo "Skipping ${project}: github-creds already exists."
+  else
+    echo "${output}" >&2
+    exit 1
+  fi
 done
 
 echo ""
