@@ -4,4 +4,4 @@
 replicaCount: 2
 
 image:
-  tag: latest
+  tag: v0.0.2
