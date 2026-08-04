@@ -9,7 +9,7 @@ metadata:
 spec:
   generators:
   - git:
-      repoURL: https://github.com/example-org/akp-platform.git
+      repoURL: https://github.com/adamancini/akp-platform.git
       revision: HEAD
       directories:
       - path: apps/*/argocd
@@ -22,7 +22,7 @@ spec:
       # so the project can't exist before the Application is created.
       project: default
       source:
-        repoURL: https://github.com/example-org/akp-platform.git
+        repoURL: https://github.com/adamancini/akp-platform.git
         targetRevision: HEAD
         path: '{{path}}'
         directory:

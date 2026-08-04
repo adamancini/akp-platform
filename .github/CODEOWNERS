@@ -11,9 +11,9 @@
 #     slug here means these paths end up with no required review at all.
 #   - `platform-team` is a placeholder team name; swap in your real one.
 
-/bootstrap/          @example-org/platform-team
-/kargo-shared/       @example-org/platform-team
-/apps/*/argocd/      @example-org/platform-team
-/apps/*/kargo/       @example-org/platform-team
-/.github/            @example-org/platform-team
-/docs/               @example-org/platform-team
+/bootstrap/          @adamancini
+/kargo-shared/       @adamancini
+/apps/*/argocd/      @adamancini
+/apps/*/kargo/       @adamancini
+/.github/            @adamancini
+/docs/               @adamancini

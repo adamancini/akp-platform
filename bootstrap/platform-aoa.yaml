@@ -11,7 +11,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/example-org/akp-platform.git
+    repoURL: https://github.com/adamancini/akp-platform.git
     targetRevision: HEAD
     path: bootstrap
   destination:
