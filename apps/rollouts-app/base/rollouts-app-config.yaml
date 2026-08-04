@@ -1,0 +1,8 @@
+# Per-env literal, patched by each overlay (see env/<stage>/kustomization.yaml)
+# the same way sedemo-platform's demo-ephemeral patches its app-config ConfigMap.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  stage: base

@@ -1,0 +1,32 @@
+# One Argo CD Application per environment directory. Unlike the rendered
+# variant, each Application syncs its Kustomize overlay directly from main —
+# Kargo promotes by committing an image-tag bump to the overlay on main.
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: rollouts-app
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/adamancini/akp-platform.git
+      revision: HEAD
+      directories:
+      - path: apps/rollouts-app/env/*
+  template:
+    metadata:
+      name: rollouts-app-{{path.basename}}
+      annotations:
+        # Authorizes the matching Kargo Stage to manage/sync this Application.
+        kargo.akuity.io/authorized-stage: rollouts-app:{{path.basename}}
+    spec:
+      project: rollouts-app
+      source:
+        repoURL: https://github.com/adamancini/akp-platform.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        # The Argo CD cluster name of your workload cluster:
+        name: demo1
+        # ...or specify a server address instead:
+        # server: https://REPLACEME

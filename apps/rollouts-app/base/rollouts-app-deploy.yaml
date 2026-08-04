@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rollouts-app
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: rollouts-app
+  template:
+    metadata:
+      labels:
+        app: rollouts-app
+    spec:
+      containers:
+      - name: rollouts-app
+        image: ghcr.io/adamancini/akp-monorepo-rollouts-app:latest
+        ports:
+        - name: http
+          containerPort: 8080
+        env:
+        # Downward API — always accurate, no per-env config needed.
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        # Literal per stage; patched via env/<stage>/kustomization.yaml.
+        - name: STAGE
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: stage
+        # Kargo's kustomize-set-image step bumps `images.newTag` on every
+        # promotion; each env overlay's `replacements` block copies that same
+        # tag into this value, so SEMVER always matches what's running —
+        # no second promotion step needed.
+        - name: SEMVER
+          value: PLACEHOLDER

@@ -1,0 +1,48 @@
+# The "update main" promotion pattern with Kustomize: every promotion is a
+# real commit to main that bumps the image tag in the stage's overlay
+# (env/<stage>/kustomization.yaml). Argo CD syncs the overlay from main, so
+# git history on main doubles as the deployment history.
+#
+# SEMVER isn't bumped by a separate step here -- each overlay's `replacements`
+# block (see env/<stage>/kustomization.yaml) copies the tag that
+# kustomize-set-image just wrote straight into the SEMVER env var.
+apiVersion: kargo.akuity.io/v1alpha1
+kind: PromotionTask
+metadata:
+  name: promote
+  namespace: rollouts-app
+spec:
+  vars:
+  - name: repoURL
+    value: https://github.com/adamancini/akp-platform.git
+  - name: image
+    value: ghcr.io/adamancini/akp-monorepo-rollouts-app
+  steps:
+  - uses: git-clone
+    config:
+      repoURL: ${{ vars.repoURL }}
+      checkout:
+      - branch: main
+        path: ./src
+  # Bump the image tag in the stage overlay's kustomization.yaml.
+  - uses: kustomize-set-image
+    as: update-image
+    config:
+      path: ./src/apps/rollouts-app/env/${{ ctx.stage }}
+      images:
+      - image: ${{ vars.image }}
+        tag: ${{ imageFrom(vars.image).Tag }}
+  - uses: git-commit
+    as: commit
+    config:
+      path: ./src
+      message: "rollouts-app/${{ ctx.stage }}: promote ${{ imageFrom(vars.image).Tag }}"
+  - uses: git-push
+    config:
+      path: ./src
+      targetBranch: main
+  # Sync the Application so the bump rolls out immediately.
+  - uses: argocd-update
+    config:
+      apps:
+      - name: rollouts-app-${{ ctx.stage }}

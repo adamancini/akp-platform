@@ -13,6 +13,7 @@ PROJECTS=(
   guestbook-kustomize
   guestbook-helm
   guestbook-helm-rendered
+  rollouts-app
 )
 
 echo -n "Enter GitHub username: "

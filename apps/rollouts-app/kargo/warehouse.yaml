@@ -1,0 +1,18 @@
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: rollouts-app
+  namespace: rollouts-app
+spec:
+  subscriptions:
+  # Image-only subscription. This variant's promotions COMMIT TO MAIN, so a
+  # git subscription to main would make every promotion produce new Freight —
+  # an endless loop. (The rendered variant can safely watch git because its
+  # promotions push to env/* branches instead.)
+  - image:
+      repoURL: ghcr.io/adamancini/akp-monorepo-rollouts-app
+      # Release tags are `<run#>-<color>` (e.g. 42-blue) -- not semver, so pick
+      # the newest build rather than trying to sort them as versions.
+      imageSelectionStrategy: NewestBuild
+      allowTagsRegexes:
+      - ^\d+-[a-z]+$
