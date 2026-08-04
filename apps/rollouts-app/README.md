@@ -44,3 +44,9 @@ doesn't need to touch it at all.
   to main from git would create a promote → new Freight → promote loop.
 - Kargo needs git *write* credentials for this project to push to main — see
   the repo root README, step 5, or `add-credentials.sh`.
+- **`prod` runs on a separate workload cluster.** Unlike every other app in
+  this repo (all on `demo1`), `argocd/appset.yaml` uses Go templating to send
+  `prod` to a `demo2` cluster destination while `dev`/`staging` stay on
+  `demo1`. `demo2` must already be registered as an Argo CD cluster
+  destination for this to sync — same requirement as `demo1` in the root
+  README's prerequisites.
