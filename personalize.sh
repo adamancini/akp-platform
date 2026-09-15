@@ -55,9 +55,12 @@ find ./apps -type f -name '*.yaml' -exec sed -E "${SEDI[@]}" \
 # Kargo control-plane destination ($-anchored so only the destination name
 # matches, not `kargo-apps`/`kargo-shared` Application names). Every bootstrap
 # manifest that targets the Kargo control plane (kargo-apps.yaml,
-# kargo-shared.yaml, akp-bootstrap-project.yaml) needs this rewrite.
+# kargo-shared.yaml, akp-bootstrap-project.yaml) needs this rewrite. The
+# optional `- ` covers akp-bootstrap-project.yaml's `destinations:` list form
+# (`    - name: kargo`) as well as the plain mapping form used elsewhere
+# (`    name: kargo`).
 find ./bootstrap -type f -name '*.yaml' -exec sed -E "${SEDI[@]}" \
-  "s#^( +)name: kargo\$#\\1name: ${kargo_dest}#" {} +
+  "s#^( +)(- )?name: kargo\$#\\1\\2name: ${kargo_dest}#" {} +
 
 # Guestbook image org — only if requested
 if [[ -n "$ghcr_org" ]]; then
