@@ -9,7 +9,7 @@ metadata:
 spec:
   generators:
   - git:
-      repoURL: https://github.com/example-org/akp-platform.git
+      repoURL: https://github.com/adamancini/akp-platform.git
       revision: HEAD
       directories:
       - path: apps/*/argocd
@@ -25,7 +25,7 @@ spec:
       # is usable (see akp-bootstrap-project.yaml for why).
       project: akp-bootstrap
       source:
-        repoURL: https://github.com/example-org/akp-platform.git
+        repoURL: https://github.com/adamancini/akp-platform.git
         targetRevision: HEAD
         path: '{{path}}'
         directory:

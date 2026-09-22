@@ -12,7 +12,7 @@ metadata:
 spec:
   vars:
   - name: repoURL
-    value: https://github.com/example-org/akp-platform.git
+    value: https://github.com/adamancini/akp-platform.git
   - name: image
     value: ghcr.io/akuity/guestbook
   steps:

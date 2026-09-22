@@ -11,8 +11,8 @@ This repo is one of three, and works standalone:
 | Repo | Role | Needed for the quickstart? |
 |---|---|---|
 | **akp-platform** (this repo) | All GitOps config: Argo CD apps, Kargo pipelines | ✅ yes — works alone |
-| [akp-monorepo](https://github.com/akuity/akp-monorepo) | App source code + CI that builds images | optional — [add it later](docs/add-monorepo.md) |
-| [akp-infra](https://github.com/akuity/akp-infra) | Terraform for Argo CD/Kargo instances, clusters, agents | optional — [its own journey](docs/add-infra.md) |
+| [akp-monorepo](https://github.com/adamancini/akp-monorepo) | App source code + CI that builds images | optional — [add it later](docs/add-monorepo.md) |
+| [akp-infra](https://github.com/adamancini/akp-infra) | Terraform for Argo CD/Kargo instances, clusters, agents | optional — [its own journey](docs/add-infra.md) |
 
 ## What you get
 
@@ -41,7 +41,7 @@ Bootstrap discovers apps by directory — onboarding never touches `bootstrap/`.
 
 - An Akuity Platform organization with an **Argo CD instance** and a **Kargo
   instance** (create them in the UI, or declaratively with
-  [akp-infra](https://github.com/akuity/akp-infra)).
+  [akp-infra](https://github.com/adamancini/akp-infra)).
 - A workload cluster connected to Argo CD (any name — the personalize script
   asks for it).
 - The Kargo instance registered in Argo CD as a cluster destination
@@ -181,7 +181,7 @@ pattern into a real repo.
 - **[Add the app monorepo](docs/add-monorepo.md)** — build your own images
   with CI and point Warehouses at them instead of the public guestbook.
 - **[Manage the platform with Terraform](docs/add-infra.md)** — the
-  [akp-infra](https://github.com/akuity/akp-infra) journey: instances,
+  [akp-infra](https://github.com/adamancini/akp-infra) journey: instances,
   clusters, and agents as code.
 
 ## Repo layout

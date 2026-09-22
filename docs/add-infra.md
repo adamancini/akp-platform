@@ -3,7 +3,7 @@
 Everything this repo assumes exists — the Argo CD instance, the Kargo
 instance, the `kargo` cluster destination, your workload cluster's agents —
 can be created and managed declaratively with the
-[akp-infra](https://github.com/akuity/akp-infra) repo and the
+[akp-infra](https://github.com/adamancini/akp-infra) repo and the
 [`akuity/akp` Terraform provider](https://registry.terraform.io/providers/akuity/akp/latest).
 
 akp-infra is its own self-guided journey, applied in order:

@@ -26,7 +26,7 @@ metadata:
 spec:
   description: Scoped project for the platform bootstrap layer (never relies on default)
   sourceRepos:
-    - https://github.com/example-org/akp-platform.git
+    - https://github.com/adamancini/akp-platform.git
   destinations:
     - name: in-cluster
       namespace: argocd

@@ -13,7 +13,7 @@ metadata:
 spec:
   generators:
   - git:
-      repoURL: https://github.com/example-org/akp-platform.git
+      repoURL: https://github.com/adamancini/akp-platform.git
       revision: HEAD
       directories:
       - path: apps/guestbook-helm-rendered/env/*
@@ -26,13 +26,13 @@ spec:
     spec:
       project: guestbook-helm-rendered
       source:
-        repoURL: https://github.com/example-org/akp-platform.git
+        repoURL: https://github.com/adamancini/akp-platform.git
         # The hydrated branch written by the Kargo promotion task.
         targetRevision: rendered/guestbook-helm-rendered/{{path.basename}}
         path: ./
       destination:
         # The Argo CD cluster name of your workload cluster:
-        name: workload-cluster
+        name: demo1
         # ...or specify a server address instead:
         # server: https://REPLACEME
         namespace: guestbook-helm-rendered-{{path.basename}}

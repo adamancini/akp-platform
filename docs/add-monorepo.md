@@ -2,7 +2,7 @@
 
 The quickstart works with the public `ghcr.io/akuity/guestbook` image so you
 never have to build anything. When you're ready to promote **your own** app,
-add [akp-monorepo](https://github.com/akuity/akp-monorepo): application
+add [akp-monorepo](https://github.com/adamancini/akp-monorepo): application
 source + GitHub Actions that build and tag images. CI and GitOps stay fully
 decoupled — they share only an **image-tag contract**, never a token.
 
@@ -18,7 +18,7 @@ pick up a PR image and vice versa.
 
 ## Steps
 
-1. **Fork [akp-monorepo](https://github.com/akuity/akp-monorepo)** (keep
+1. **Fork [akp-monorepo](https://github.com/adamancini/akp-monorepo)** (keep
    the name, keep it public), run its `personalize.sh`, and enable GitHub
    Actions on the fork.
 2. **Trigger a first release**: change anything under `apps/rollouts-app/`,

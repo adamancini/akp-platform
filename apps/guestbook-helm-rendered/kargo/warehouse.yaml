@@ -15,7 +15,7 @@ spec:
   # Scoped with includePaths so promotions (which push to rendered/* branches)
   # and other apps' changes never trigger this warehouse.
   - git:
-      repoURL: https://github.com/example-org/akp-platform.git
+      repoURL: https://github.com/adamancini/akp-platform.git
       branch: main
       includePaths:
       - apps/guestbook-helm-rendered

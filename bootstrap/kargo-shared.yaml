@@ -21,7 +21,7 @@ spec:
   # project, never `default` (see akp-bootstrap-project.yaml for why).
   project: akp-bootstrap
   source:
-    repoURL: https://github.com/example-org/akp-platform.git
+    repoURL: https://github.com/adamancini/akp-platform.git
     targetRevision: HEAD
     path: kargo-shared
     directory:

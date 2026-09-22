@@ -10,7 +10,7 @@ metadata:
 spec:
   generators:
   - git:
-      repoURL: https://github.com/example-org/akp-platform.git
+      repoURL: https://github.com/adamancini/akp-platform.git
       revision: HEAD
       directories:
       - path: apps/guestbook-helm/env/*
@@ -26,19 +26,19 @@ spec:
       # Source 1: the chart, with the per-env values file pulled in from
       # source 2 (the `$values` ref) — value files outside the chart directory
       # require this multi-source pattern.
-      - repoURL: https://github.com/example-org/akp-platform.git
+      - repoURL: https://github.com/adamancini/akp-platform.git
         targetRevision: HEAD
         path: apps/guestbook-helm/chart
         helm:
           valueFiles:
           - $values/apps/guestbook-helm/env/{{path.basename}}/values.yaml
       # Source 2: the same repo, exposed to source 1 as `$values`.
-      - repoURL: https://github.com/example-org/akp-platform.git
+      - repoURL: https://github.com/adamancini/akp-platform.git
         targetRevision: HEAD
         ref: values
       destination:
         # The Argo CD cluster name of your workload cluster:
-        name: workload-cluster
+        name: demo1
         # ...or specify a server address instead:
         # server: https://REPLACEME
         namespace: guestbook-helm-{{path.basename}}
